@@ -1,0 +1,16 @@
+citHeader("To cite 'REMAINS' package in publications use:")
+
+citEntry(entry="Manual",
+         title = "The REMAINS R-package: Paving the Way for Fire-Landscape Modeling and Management",
+         author = "Silvana Pais, Núria Aquilué, Lluís Brotons, João P. Honrado, Paulo Fernandes, Adrián Regos",
+         journal = "Environmental Modelling and Software",
+         year = "2023",
+         textVersion =
+         paste("Pais, S., Aquilué, N., Brotons, L., Honrado, J. P., Fernandes, P., Regos, A. (2023)",
+               "The REMAINS R-package: Paving the Way for Fire-Landscape Modeling and Management",
+               "Environmental Modelling and Software",
+               "DOI nnnn",
+               sep=""),
+         )
+
+citFooter("Thank you for using 'REMAINS'")

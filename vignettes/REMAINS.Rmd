@@ -1,0 +1,88 @@
+---
+title: "REMAINS: Processes, design concepts, variables, and initialization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{REMAINS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup,echo=F}
+# library(REMAINS)
+```
+
+# Purpose  
+
+The **REMAINS** model integrates the main landscape-level processes driving fire-vegetation dynamics in mountain landscapes of northern Iberian Peninsula. It includes the main anthropogenic and natural (abiotic and biotic) drivers of landscape change to study their spatiotemporal interactions and feedbacks effects. The model allows investigating the interlinked effects of land-use change, forest management strategies, and natural disturbances (mainly wildfires) on vegetation dynamics and overall landscape composition. Ultimately, the model aims to generate spatially explicit scenarios of landscape dynamics according to pre-designed socio-economic scenario storylines. Future landscape representations will be the basis for biodiversity and ecosystem services studies in fire-prone, abandoned mountain landscapes in a global change context.  
+
+# State variables and scales
+
+**REMAINS** works with three spatial state variables that are dynamic over the time. The initialization of these variables for the Transboundary Biosphere Reserve Gerês-Xurés is briefly detailed in the section Initialization. These are:  
+
+i.	Land cover map: describes the nine main land use and cover types of the study area: agricultural land, grassland/grazing, scrublands, sparse vegetation, pine forest, oak forest, bare soil, water and urban. All of them are considered dynamics, except water and urban that are static.  
+
+ii.	Time since change (TSChg): indicates the time (in years) since the last land-cover transition.  
+
+iii.	Transformation type (TransType): records which type of transitions has more recently impacted a location: a stand-replacing fire, an anthropogenic driven transition (these are rural abandonment – from cropland to scrubland –, agriculture intensification – from scrubland to cropland –, forest plantation – from scrubland to pine forest–, and fire-smart plantation – from pine forest to oak forest –), or a natural successional transition (these are afforestation – from scrubland to oak forest – and vegetation encroachment – from rocky areas with sparse vegetation to scrubland –). 
+
+Indeed, **REMAINS** is supported by static spatial variables. These are:  
+
+i.	AdminRegion: the study area encompasses 2 countries, Portugal and Galicia.  
+
+ii.	Elevation: digital elevation model (in m).  
+
+iii.	Aspect: aspect derived from the DEM (1 - north, 2 - east, 3 - south, and 4 - west).  
+
+iv.	SlopeDegree: slope derived from the DEM (in degrees).  
+
+The spatial resolution is 100 m2 and the finer temporal resolution is set at 1 year.  
+
+
+# Process overview 
+
+The individual processes that **REMAINS** simulates can be grouped in three major drivers of change: (1) land use changes (e.g. rural abandonment, agriculture conversion and plantations), (2) wildfires, prescribed fires and fire suppression, and (3) vegetation dynamics such as post-fire regeneration, vegetation encroachment and woody colonization of scrublands (i.e. afforestation) (Fig. 1). We do not model other disturbances such as forest diseases (i.e. pathogens, herbivorous insects) or windthrows, nor forest management (i.e. sylvicultural treatments).
+
+![Land-cover types for the Gerês-Xurés Transboundary Natural Park and both anthropogenic and natural driven land-cover transformations. Potential post-fire state is indicated in red for both the dynamic and the static land-covers. The potential state after the use of prescribed fire is indicated in orange (only simulated in ground covers with scrub and grassland)](c:/work/OneDrive - ctfc.cat/FirESmart/REMAINS/REMAINS/vignettes/land_cover_trans.png){width=700 height=500}   
+
+
+# Land use changes 
+
+In the current version of the model, and to answer the proposed research questions, five anthropogenic-driven land cover transitions are modelled: (1) economic plantations, the transition of scrublands to pine plantations, (2) fire-smart plantations, the transition of pine plantations to oak forests, (3) rural abandonment, the conversion of marginal crops and grasslands to semi-natural vegetation areas identified as scrublands, (4) agriculture intensification, the conversion of scrublands to cultivated land, and (5) prescribed fire use in shrublands and in areas classified as grasslands, with a predefined temporal recurrence (Fig.1). In our modelling framework a land-cover transition (e.g. rural abandonment) is defined by a unique target land-cover (e.g. scrublands) and all the land-covers that may undergo change (e.g. croplands and grasslands). Land-cover transitions are modelled using a demand-allocation approach. The demand or quantity-of-change by time step has to be provided by the user (based on e.g. historical trends or to emulate landscape scale management policies). Changes will occur in locations with a higher likelihood to be transformed to the target land-cover. The allocation of the changes follows an algorithm that recognizes the contagion character of such processes.  
+
+
+# Wildfires and fire suppression  
+
+A landscape implicitly has a fire regime associated, even though it may be altered or modified by extreme climatic conditions. We adopted a top-down approach to model at the landscape level a fire regime (that currently does not depend on climate). At each time step, each fire event ignites, spreads, and gets extinct to reach a target annual area that is specific for each administrative region of the study area. The target fire sizes are a model input too, but the final fire size emerges from the spatial interaction between the location of the fire ignition, the landscape composition, the orography, and the fire suppression if applied. The spatial distribution of fire ignitions depends on landscape configuration, elevation and accessibility, while fire spread depends on slope, aspect, and land-covers / species flammability. All land-covers burn at high intensity, mimicking a stand-replacing crown-fire in natural areas. Final fire sizes can be explicitly reduced if a fire suppression strategy (or a combination of strategies) is activated. Currently two firefighting actions are designed: (1) a fuel-based strategy that take advantage of low fire spreading situations to suppress the fire and (2) a landscape-based strategy that uses open mosaics to stop the advancing fronts.
+
+
+# Prescribed fire   
+
+Fire is a key ecological process in many ecosystems worldwide that determines a wide range of ecosystem attributes, from nutrient cycling rates to vegetation structure to patterns of biodiversity at multiple scales. Fires create patterns on the landscape, but they also respond to landscape pattern, and their occurrence and behavior are more predictable than many other natural disturbances such as hurricanes or wind. Having said that, considering the fire pattern present in the study area, the Remains II model simulates prescribed fires that burn randomly in only two land cover types, with repetition every 3 and/or 4 years.
+This version of the model will also allow testing whether burnt corridors (burning around roads and main paths) with prescribed fire will have an impact on reducing areas burnt by wildfires and benefit the creation of open spaces. Finally, the model will be induced to burn according to two key limits: burning 5% of the forest area (value practiced in countries with large forest management) and, burning 0,5% of the forest area (corresponding to what is currently burned in Portugal).
+
+
+# Vegetation dynamics  
+
+For simplification, we assume that natural vegetation in mountain landscapes always follows the same successional pathway, from rocky areas to closed scrublands, and then to oak forests. The transformation from one state to the following only occurs after a fixed period of time since the last transition and depends on the presence of potential colonizers in a circular neighbourhood around the target location. 
+Fire spreads and burns all land-covers except urban areas and inland water, these are oak forests, pine plantations, scrublands, rocky or open scrublands, grasslands, and agricultural lands. We assume that fire is a stand-replacing disturbance, then the time since last fire (a proxy of the biomass) turns to 0. After fire, agricultural lands, scrublands and open scrublands persist (i.e. there is no land-cover change because of fire) while forest stands may partially change state to scrublands or to rocky scrublands (Fig. 1). A percentage of forest areas (pine and oaks) return to the pre-fire state after some years after fire while some forest areas remain scrublands or rocky vegetation for a while.
+
+
+# Process scheduling  
+
+At the beginning of each year, the model updates the internal variables related to the landscape composition (i.e. interface type variables). Then, in the time span of one year, the ecological and anthropogenic processes chronologically occur as follows:
+i.	Economic plantations
+ii.	Fire-smart plantations
+iii.	Agriculture intensification
+iv.	Rural abandonment
+v.	Fire
+vi.	Prescribed fire
+vii.	Post-fire regeneration
+viii.	Afforestation
+ix.	Vegetation encroachment

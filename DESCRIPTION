@@ -1,0 +1,21 @@
+Package: REMAINS
+Type: Package
+Title: Fire-vegetation landscape model in mountain regions
+Version: 1.0
+Date: 2023-06-06
+Authors@R: c(
+	person('Núria', 'Aquilué', role=c('aut','cre'),
+	email='nuria.aquilue@ctfc.cat'),
+	person('Silvana', 'Pais', role=c('aut'),
+	email='silvana10pais@gmail.com'),
+	person('Adrián', 'Regos', role=c('aut'),
+	email='adrian.regos@usc.es'))
+Description: A fire-vegetation dynamics for mountain landscapes of northern Iberian Peninsula
+License: GPL (>= 2)
+Encoding: UTF-8
+Depends: R (>= 4.1), dplyr, tidyr, RANN
+Imports: foreign, ggplot2
+Suggests: RODBC, knitr, rmarkdown
+LazyData: true
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr
