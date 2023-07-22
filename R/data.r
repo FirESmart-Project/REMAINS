@@ -105,7 +105,7 @@
 #' @format A data frame with as many rows as grid cells in the study area and 8 variables:
 #' \describe{
 #'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{region}{\code{GZ} is Galicia and \code{PT} is Protugal)}
+#'   \item{region}{\code{GZ} is Galicia and \code{PT} is Portugal)}
 #'   \item{protected}{protected status (\code{TRUE}/\code{FALSE})}
 #'   \item{elevation}{Elevation (in m)}
 #'   \item{aspect}{Aspect, 0 - flat, 1 - north, 2 - east, 3 - south, 4 - west}
