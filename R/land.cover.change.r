@@ -6,8 +6,8 @@
 #' time since last cover-change
 #' @param params List of the parameters of the model 
 #' @param lc.trans Identifier of the land-cover transition: 1 - smart plantation, 2 - agriculture conversion, 
-#' 3 - rurla abandonment, and 4 - pasture abanonment.
-#' @param trgt.dmnd Number of hecatres to be converted to the target land-cover type
+#' 3 - rural abandonment, and 4 - pasture abandonment.
+#' @param trgt.dmnd Number of hectares to be converted to the target land-cover type
 #' @param visit.cells Vector of cells' identifier that have already been subject of change for a land-cover change process
 #'
 #' @return Returns a vector with cells' identifiers to change the land-cover type

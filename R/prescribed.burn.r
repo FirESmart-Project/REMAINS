@@ -7,7 +7,7 @@
 #' @param params List of the parameters of the model 
 #' @param out.maps A flat to save maps as .tif files of wildfire identifier, wildfire step and fire risk
 #' 
-#' @return Returns a vector with cells' identifiers burnt, suppresed
+#' @return Returns a vector with cells' identifiers burnt, suppressed
 #'
 #' @export
 #' 
