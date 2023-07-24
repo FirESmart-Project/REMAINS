@@ -96,7 +96,7 @@
 #'         \item{\code{year}: Year YYYY.}
 #'         \item{\code{region}: Region: Portugal and Spain.}
 #'         \item{\code{lct}: Land-cover type.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
@@ -107,7 +107,7 @@
 #'         \item{\code{year}: Year YYYY.}
 #'         \item{\code{region}: Region: Portugal and Spain.}
 #'         \item{\code{lct}: Land-cover type.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: TAge (in years).}
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
@@ -116,7 +116,7 @@
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
 #'         \item{\code{year}: Year YYYY.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
 ##'       }
 #'    }
@@ -125,7 +125,7 @@
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
 #'         \item{\code{year}: Year YYYY.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
@@ -159,15 +159,15 @@
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
-#'    \item{\code{Forest.recover}: A data frame of forest recover
+#'    \item{\code{Forest.recover}: A data frame of potential forest recovering from shrublands
 #'    (included if \code{is.forest.recover}), with columns:
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
 #'         \item{\code{year}: Year YYYY.}
-#'         \item{\code{current.shrub.to.pine}: XXX.}
-#'         \item{\code{current.shrub.to.oak}: XXX.}
-#'         \item{\code{convert.to.pine}: XXX.}
-#'         \item{\code{convert.to.oak}: XXX.}
+#'         \item{\code{current.shrub.to.pine}: Burnt area of shrubland in the current time step that will convert to pine forest in the following years (in ha).}
+#'         \item{\code{current.shrub.to.oak}: Burnt area of shrubland in the current time step that will convert to oak forest in the following years (in ha).}
+#'         \item{\code{convert.to.pine}: Shrubland area that convert/transform to pine forest (in ha).}
+#'         \item{\code{convert.to.oak}: Shrubland area that convert/transform to oak forest (in ha).}
 #'       }
 #'    }
 #'     \item{\code{Afforest}: A data frame with the colonization of shrublands by oak and/or pines species
@@ -181,21 +181,19 @@
 #'         \item{\code{afforest.oak}: Area (in ha).}
 #'       }
 #'    }
-#'    \item{\code{oak.age}: A data frame of xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-#'    (included if \code{is.afforestation}), with columns:
+#'    \item{\code{oak.age}: A data frame of oak forest per age with columns:
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
 #'         \item{\code{year}: Year YYYY.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
-#'    \item{\code{pine.age}: A data frame of xxxxxxxxxxxxxxxxxxxxxxxxx
-#'    (included if \code{is.afforestation}), with columns:
+#'    \item{\code{pine.age}: A data frame of pine forest per age with columns:
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
 #'         \item{\code{year}: Year YYYY.}
-#'         \item{\code{tschg}: Time since the last land-cover transition (in years).}
+#'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
@@ -216,8 +214,8 @@
 #' @examples
 #'
 #' \dontrun{
-#' library(REMAINS) ############# right??????
-#' # Run one single 2020 replicate with forest management ########### 2020 right???
+#' library(REMAINS) 
+#' # Run one single 2020 replicate with forest management 
 #' result = land.dyn.mdl(is.harvest = T)
 #' }
 #'
