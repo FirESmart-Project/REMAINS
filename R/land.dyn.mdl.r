@@ -51,9 +51,9 @@
 #'         \item{\code{fire.id}: Fire event identificator.}
 #'         \item{\code{atarget}: Target area to be burnt (in ha).}
 #'         \item{\code{aburnt}: Area burnt (in ha).}
-#'         \item{\code{asupp.fuel}: Area suppressed in low-fuel conditions (in ha).} ##### CONFIRMAR
-#'         \item{\code{asupp.mosaic}: Area suppressed in slow fire spread conditions (in ha).} ####### CONFIRMAR
-#'         \item{\code{rem}: Remaining area, not burnt, neither suppressed (in ha).}    ##### CONFIRMAR   
+#'         \item{\code{asupp.fuel}: Area suppressed in low fire spread conditions (in ha).} 
+#'         \item{\code{asupp.mosaic}: Area suppressed due to the suppression opportunities created by croplands (in ha).} 
+#'         \item{\code{rem}: Remaining area, not burnt, neither suppressed (in ha).}    
 #'       }
 #'    }
 #'    \item{\code{lc.burnt.supp}: A data frame of burned and suppressed land-cover types 
@@ -111,7 +111,7 @@
 #'         \item{\code{area}: Area (in ha).}
 #'       }
 #'    }
-#'    \item{\code{unburnt.aok.age}: A data frame xxxxxxxxxxxxxxxxxxxxxxxxxx
+#'    \item{\code{unburnt.aok.age}: A data frame with unburnt oak forest per age
 #'    (included if \code{is.wildfire}), with columns:
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
@@ -120,7 +120,7 @@
 #'         \item{\code{area}: Area (in ha).}
 ##'       }
 #'    }
-#'    \item{\code{unburnt.pine.age}: A data frame xxxxxxxxxxxxxxxxxxxxxxxxxxx
+#'    \item{\code{unburnt.pine.age}: A data frame with unburnt pine forest per age 
 #'    (included if \code{is.wildfire}), with columns:
 #'      \itemize{
 #'         \item{\code{run}: Number of replicate.}
