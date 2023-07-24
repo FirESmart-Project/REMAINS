@@ -27,17 +27,16 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
   track.fires = NULL
   visit.cells = eval.cells = burnt.cells = integer()
   
-  ## Sub-select the 'land' data frame to the only two land-cover types that are burnt with pb
-  ## Moreover, only cells with tschg >= 4 are elegible or tschg>=3 ???
+  ## Sub-select the 'land' data frame to the only two land-cover types that are burnt with prescribed burns
   subland = land %>% filter(lct %in% c("grass", "shrub")) %>% select(-trans.type) %>% 
     filter(tschg >= 3) %>% left_join(orography, by = "cell.id") 
   
-  ## Sub-select non-protected areas if pb is excluded within protected areas
+  ## Sub-select non-protected areas if prescribed burn is excluded within protected areas
   if(params$pb.exclude.protected){
     subland = subland %>% filter(!protected)
   }
   
-  ## Initialize a df such as subland to store the fire.id and the spread step of the burnt cells
+  ## Initialize a df such as subland  to store the fire.id and the spread step of the burnt cells
   if(out.maps){
     map = data.frame(cell.id=subland$cell.id, id=NA, step=NA)
   }
@@ -109,9 +108,9 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
     ## Controls of the fire shape
     ## Max number of cells in the fire front
     mx.ncell.ff = ifelse(fire.target.area<=500, 12, ifelse(fire.target.area<=1500, 20, ifelse(fire.target.area<=5000, 30, 40)))
-    ## Min number of cells in the fire front, no sé si per incendis de me´s de 5000 o me´s d 10000
-    mn.ncell.ff = ifelse(fire.target.area<=5000, 8, 16)  # not sure if 16 for wind and 12 for convective
-    # threshodl ratio.burnt to be aplied, no sé si per incendis de me´s de 5000 o me´s d 10000
+    ## Min number of cells in the fire front
+    mn.ncell.ff = ifelse(fire.target.area<=5000, 8, 16)  
+    # threshold ratio.burnt to be applied
     thruky = ifelse(fire.target.area<=5000, 0.85, 0.95)
     
     ## Initialize tracking variables
@@ -141,7 +140,7 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
       ## Increment step
       step = step + 1
       
-      ## Build a data frame with the theoretical #default.nneigh# neighbors of all the cells in the fire.front, 
+      ## Build a data frame with the theoretical #default.nneigh# neighbors of all the cells in the fire.front, ########### CORRIGIR NURIA
       ## and include the distance between the source and the neighbor.
       ## Filter by cells that have not been burnt yet.
       neigh.id = data.frame(cell.id=as.integer(rep(fire.front, each=default.nneigh)+rep(default.neigh$x, length(fire.front))),
@@ -152,7 +151,7 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
         left_join(select(subland, cell.id, elevation), by=c("source.id"="cell.id")) %>% 
         mutate(elevation.source = elevation) %>% select(-elevation) 
       
-      ## Compute the spread rate and the probability of burning by 
+      ## Compute the spread rate and the probability of burning by ############ complete NURIA
       ## - 
       neigh.land = subland[subland$cell.id %in% neigh.id$cell.id, c("cell.id", "lct", "tschg", "elevation")] %>%  
         left_join(params$lct.fire.prone, by="lct") %>% 
@@ -160,7 +159,7 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
         mutate(dif.elev = (elevation-elevation.source)/dist,
                slope = pmax(pmin(dif.elev,0.5),-0.5)+0.5,
                sr = params$wslope*slope + params$wlc*flam,
-               sr = ifelse((lct=="shrub" & tschg<=4) | (lct %in% c("pine", "oak") & tschg <=8), 0.2, sr))   # Low fire spread rate for low-fuel land-covers
+               sr = ifelse((lct=="shrub" & tschg<=4) | (lct %in% c("pine", "oak") & tschg <=8), 0.2, sr)) 
       neigh.land$pb = 1-exp(-params$facc*neigh.land$sr) + runif(nrow(neigh.land), -params$rpb, params$rpb)   
       neigh.land
       sprd.rate = group_by(neigh.land, cell.id) %>% 
@@ -198,8 +197,6 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
         ratio.burnt = (aburnt)/fire.target.area
         z = runif(1,mx.ncell.ff-5,mx.ncell.ff)
         ncell.ff = min(nburn*runif(1,0.5,0.7), round(z), na.rm=T)
-        # si el nombre cell del ff coincideix amb el màxim  
-        # o bé aleatòriament cap al final de l'incendi, forço compacitat.
         if(ncell.ff==z | (ratio.burnt>=thruky & runif(1,0,1)>=0.75)){
           p = sprd.rate$nsource[sprd.rate$burn]/100
           if(class(try(sample(sprd.rate$cell.id[sprd.rate$burn], round(ncell.ff), replace=F, prob=p), silent=T))=="try-error"){

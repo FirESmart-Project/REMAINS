@@ -41,7 +41,7 @@ postfire.rege = function(land, params){
     ## Pine and oaks regenerate to themselves, shrubs and sparseveg. 
     ## However, sparseveg only is found in high elevation, so the assignation of a new land-cover type
     ## has to be done according to the amount of burnt forest in each elevation class and respecting
-    ## the transition probabilites for each species.
+    ## the transition probabilities for each species.
     
     ## So first, count the proportion of burnt pines and oaks in low and high elevations
     prop.lc.elev = burnt.cells %>% filter(lct %in% c("pine", "oak")) %>% group_by(lct) %>% 

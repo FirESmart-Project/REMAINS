@@ -38,7 +38,7 @@ land.cover.change = function(land, params, lc.trans = 1, trgt.dmnd = 0, visit.ce
   `%notin%` = Negate(`%in%`)
 
   ## Join land-cover/spp info to coordinates to preselect coordinates of those cells that may
-  ## undergo change per each land-cover transition
+  ## under go change per each land-cover transition
   coord.land = left_join(coords, select(land, cell.id, lct), by="cell.id")
   
   ## Define per each land-cover transition, the transition potential layer (probability of ignition) 
@@ -67,10 +67,8 @@ land.cover.change = function(land, params, lc.trans = 1, trgt.dmnd = 0, visit.ce
   }
   if(lc.trans==4){
     x = (land$interface == "shrb") 
-    # y = orography$elevation 
     trans.pot = ifelse(params$mode.trans.potential$PastureAbnd=="random", 1, 
                   ifelse(params$mode.trans.potential$PastureAbnd=="interface", x, NA))
-                    # ifelse(params$mode.trans.potential$PastureAbnd=="newcriteria", y, NA)))
     lc.source = (land$lct == "grass")
     coord.land = filter(coord.land, lct=="grass") %>% select(-lct)
   }
@@ -122,7 +120,7 @@ land.cover.change = function(land, params, lc.trans = 1, trgt.dmnd = 0, visit.ce
     ## Remove front cells from the 'chg' data.frame
     ## Then add new cells that (1) are less than 200m appart from the source cell, 
     ## (2) a waiting time = rexp(lsprd) * w.tini^k (if a cell is visited more than once, 
-    ## keep the mininum waitint time), and (3) have not been changed by other land-cover transitions
+    ## keep the minimum waiting time), and (3) have not been changed by other land-cover transitions
     chg = rbind(filter(chg, cell.id %notin% front), 
                  data.frame(cell.id=coord.land$cell.id[neighs$nn.idx[,-1][neighs$nn.dists[,-1] <200]], 
                             wt.ini=wt.inis[neighs$nn.dists[,-1] <200]) %>% 

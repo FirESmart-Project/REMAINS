@@ -7,7 +7,7 @@
 #' @param params List of the parameters of the model 
 #' @param out.maps A flat to save maps as .tif files of wildfire identifier, wildfire step and fire risk
 #' 
-#' @return Returns a vector with cells' identifiers burnt, suppresed
+#' @return Returns a vector with cells' identifiers burnt, suppressed
 #'
 #' @export
 #' 
@@ -46,7 +46,7 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
   subland$pigni = fire.risk(subland, orography[orography$cell.id %in% subland$cell.id,], params$ha.cell)
 
   ## Build a data frame with the position and distance of the neighbors to a target cell
-  ## By now, this data frame has the target cell (it will be removed later)
+  ## By now, this data frame has the target cell
   ## Work with 8 neighbors 
   pos = c(-1,0,1)
   ncol = ncol(mask.study.area)
@@ -55,16 +55,6 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
                              dist=c(d1, params$cell.size, d1,
                                     params$cell.size, 0, params$cell.size,
                                     d1, params$cell.size, d1))
-  
-  # ## Or with 24 neighbors 
-  # pos = c(-2,-1,0,1,2)
-  # d2 = sqrt(params$cell.size^2+(2*params$cell.size)^2)
-  # default.neigh = data.frame(x = c(-2*ncol+pos, -ncol+pos, pos, ncol+pos, 2*ncol+pos),
-  #                            dist = c(d1*2, d2, params$cell.size*2, d2, d1*2,
-  #                                     d2, d1, params$cell.size, d1, d2,
-  #                                     2*params$cell.size, params$cell.size, 0, params$cell.size, 2*params$cell.size,
-  #                                     d2, d1, params$cell.size, d1, d2,
-  #                                     d1*2, d2, params$cell.size*2, d2, d1*2))
   
   ## Count the number of neighs 
   default.neigh = default.neigh[default.neigh$dist!=0,]
@@ -121,9 +111,9 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
       ## Controls of the fire shape
       ## Max number of cells in the fire front
       mx.ncell.ff = ifelse(fire.target.area<=500, 12, ifelse(fire.target.area<=1500, 20, ifelse(fire.target.area<=5000, 30, 40)))
-      ## Min number of cells in the fire front, no sé si per incendis de me´s de 5000 o me´s d 10000
-      mn.ncell.ff = ifelse(fire.target.area<=5000, 8, 16)  # not sure if 16 for wind and 12 for convective
-      # threshodl ratio.burnt to be aplied, no sé si per incendis de me´s de 5000 o me´s d 10000
+      ## Min number of cells in the fire front
+      mn.ncell.ff = ifelse(fire.target.area<=5000, 8, 16) 
+      # threshold ratio.burnt to be applied
       thruky = ifelse(fire.target.area<=5000, 0.85, 0.95)
       
       ## Initialize tracking variables
@@ -164,7 +154,6 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
                               position=rep(cumul.source, each=default.nneigh),
                               agri.front=rep(cumul.agri, each=default.nneigh)) %>%
           filter(!(cell.id %in% eval.cells)) %>% 
-            # look if source cells have been suppressed, mark whether these are agricultural land, and keep their elevation
           left_join(select(subland, cell.id, lct, elevation, is.source.supp.fuel, is.source.supp.mosaic), by=c("source.id"="cell.id")) %>% 
           mutate(is.source.agri = (lct=="crop"), elevation.source = elevation) %>% select(-lct, -elevation) 
 
@@ -225,38 +214,22 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
             
         ## Select the new fire front
         nburn = sum(sprd.rate$burn)
-        # if(is.na(nburn)){
-        #   write.table(sprd.rate, paste0(out.path, "/ErrorSR.txt"), quote=F, row.names=F, sep="\t")
-        #   write.table(sprd.rate.sources, paste0(out.path, "/ErrorSRsource.txt"), quote=F, row.names=F, sep="\t")
-        #   error = filter(land, cell.id %in% sprd.rate$cell.id[is.na(sprd.rate$fi)])
-        #   write.table(as.data.frame(error), paste0(out.path, "/ErrorCell.txt"), quote=F, row.names=F, sep="\t")
-        #   stop("NA in spread.rate")
-        # }
+
         if(nburn<=mn.ncell.ff){
           fire.front = sprd.rate$cell.id[sprd.rate$burn]
         } else{
           ratio.burnt = (aburnt+asupp.fuel+asupp.mosaic)/fire.target.area
           z = runif(1,mx.ncell.ff-5,mx.ncell.ff)
           ncell.ff = min(nburn*runif(1,0.5,0.7), round(z), na.rm=T)
-          # si el nombre cell del ff coincideix amb el màxim  
-          # o bé aleatòriament cap al final de l'incendi, forço compacitat.
           if(ncell.ff==z | (ratio.burnt>=thruky & runif(1,0,1)>=0.75)){
             p = sprd.rate$nsource[sprd.rate$burn]/100
             if(class(try(sample(sprd.rate$cell.id[sprd.rate$burn], round(ncell.ff), replace=F, prob=p), silent=T))=="try-error"){
-              # save.image(file= paste0(out.path, "/EnvironmentFRONT1.rdata"))
-              # write.table(sprd.rate, paste0(out.path, "/ErrorSR.txt"), quote=F, row.names=F, sep="\t")
-              # write.table(sprd.rate.sources, paste0(out.path, "/ErrorSRsource.txt"), quote=F, row.names=F, sep="\t")
-              # cat("NA in sample fire.front 1")
               fire.front = sort(sprd.rate$cell.id[sprd.rate$burn]) ## all burnt in fire.front
             } else{
               fire.front = sort(sample(sprd.rate$cell.id[sprd.rate$burn], round(ncell.ff), replace=F))  
             }
           } else{
             if(class(try(sample(sprd.rate$cell.id[sprd.rate$burn], round(ncell.ff), replace=F), silent=T))=="try-error"){
-                # save.image(file= paste0(out.path, "/EnvironmentFRONT2.rdata"))
-                # write.table(sprd.rate, paste0(out.path, "/ErrorSR.txt"), quote=F, row.names=F, sep="\t")
-                # write.table(sprd.rate.sources, paste0(out.path, "/ErrorSRsource.txt"), quote=F, row.names=F, sep="\t")
-                # cat("NA in sample fire.front 2")
               fire.front = sort(sprd.rate$cell.id[sprd.rate$burn]) ## all burnt in fire.front
             } else{
               fire.front = sort(sample(sprd.rate$cell.id[sprd.rate$burn], round(ncell.ff), replace=F))

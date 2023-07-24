@@ -52,7 +52,7 @@ forest.recover = function(land, params, shrub2pine, shrub2oak, t = 1){
   ## Initialize vectors to save the cell.id of those cells that will change
   pine.recover.cells = oak.recover.cells = numeric()
   
-  ## If there are cells to be converted to pine ...
+  ## If there are cells to be converted to pine
   if(shrub2pine[t]>0){
     
     ## Count available shrublands that can become pine (n.cells)
@@ -91,7 +91,7 @@ forest.recover = function(land, params, shrub2pine, shrub2oak, t = 1){
   }
   
   
-  ## If there are cells to be converted to oak ...
+  ## If there are cells to be converted to oak
   if(shrub2oak[t]>0){
     
     ## Count available shrublands that can become oak (n.cells)

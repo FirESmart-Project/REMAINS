@@ -78,7 +78,7 @@
 #'
 #' @format A data frame with as many rows as grid cells in the study area and 3 variables:
 #' \describe{
-#'   \item{SmartPlant}{Conversion rate for smart plantations (oaks spp) (in ha/year)}
+#'   \item{SmartPlant}{Conversion rate for smart plantations: oaks spp (in ha/year)}
 #'   \item{AgriConver}{Conversion rate for agricultural conversion (in ha/year)}
 #'   \item{RuralAbnd}{Conversion rate for rural abandonment (in ha/year)}
 #' }
