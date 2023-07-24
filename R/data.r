@@ -1,37 +1,30 @@
-#' Annual area burnt in Galicia 
+#' Annual area burnt in Galicia
 #'
-#' Discrete distribution of annual area burnt in Galicia observed between xxx - xxx
+#' Discrete distribution of annual area burnt in Galicia observed between 1986-2011 
 #'
-#' @format A data frame with two variables:
+#' @format A data frame with as many rows as grid cells in the study area and 2 variables:
 #' \describe{
-#'   \item{upper.th}{Upper threshold of discrete invtervals of annual area burnt}
+#'   \item{upper.th}{Upper threshold of discrete intervals of annual area burnt}
 #'   \item{freq}{Number of fires per class}
 #' }
 #' 
 "burnt.area.dist.gz"
 
-#' Timber harvesting allocation
+#' Annual area burnt in Portugal
 #'
-#' Landscape variables influencing the allocation of sylvicultural prescriptions
+#' Discrete distribution of annual area burnt in Portugal observed between 1980-2016 
 #'
-#' @format A data frame with as many rows as grid cells in the study area and 6 variables:
+#' @format A data frame with as many rows as grid cells in the study area and 2 variables:
 #' \describe{
-#'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{enpe}{Code of the protection status: 0 - none, 1 - national park, 2 - natural park, 
-#'   3 - Natural place of national interest, 4 - Wildlife nature reserve, 5 - Integral natural reserve,
-#'   6 - Partial natural reserve, 7 - Peripheral protection zone of a national park, 
-#'   8 - Peripheral protection zone of a natural park, 9 - Peripheral protection zone of a natural place}
-#'   \item{dist.path}{Distance to the nearest road or forest track, in m}
-#'   \item{slope.pctg}{Stand slope, in /100}
-#'   \item{dist.industry}{Distance to the nearest wood transformation industry, in km}
-#'   \item{dist.biomass}{Distance to the nearest biomass plant, in km}
+#'   \item{upper.th}{Upper threshold of discrete intervals of annual area burnt}
+#'   \item{freq}{Number of fires per class}
 #' }
 #' 
 "burnt.area.dist.pt"
 
 #' UTM coordinates 
 #'
-#' Coordinates x and y in UTM31N-ETRS89 of the 1 ha cells in the study area.
+#' Coordinates x and y in UTM29N-ETRS89 of the 1 ha cells in the study area
 #'
 #' @format A data frame with as many rows as grid cells in the study area and 3 variables:
 #' \describe{
@@ -39,95 +32,70 @@
 #'   \item{x}{UTM coordinate X}
 #'   \item{y}{UTM coordinate Y}
 #' }
+#' 
 "coords"
 
-#' 1993 - 2017 Land-cover changes 
+#' Fire size distribution in Galicia
 #'
-#' Codification of the land-cover changes occurred between 1993 and 2017 based on the 
-#' 20-categories legend of the Land Cover Map of Catalonia
+#' Discrete distribution of annual area burnt in Galicia observed between 1986-2011 
 #'
-#' @format A data frame with as many rows as grid cells in the study area and 2 variables:
+#' @format A data frame with two variables:
 #' \describe{
-#'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{code}{Code made by merging the 2-digits code of the land-cover type in 1993 
-#'   to the 2-digits code of the land-cover code in 2017. The 20-categories legend is as \code{landscape$spp}}
+#'   \item{upper.th}{Upper threshold of discrete intervals of fire size}
+#'   \item{freq}{Number of fires per class}
 #' }
+#' 
 "fire.size.dist.gz"
 
-#' 1993 - 2017 Land-cover changes 
+#' Fire size distribution in Portugal
 #'
-#' Codification of the land-cover changes occurred between 1993 and 2017 based on the 
-#' 20-categories legend of the Land Cover Map of Catalonia
+#' Discrete distribution of annual area burnt in Portugal observed between 1980-2016
 #'
-#' @format A data frame with as many rows as grid cells in the study area and 2 variables:
+#' @format A data frame with two variables:
 #' \describe{
-#'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{code}{Code made by merging the 2-digits code of the land-cover type in 1993 
-#'   to the 2-digits code of the land-cover code in 2017. The 20-categories legend is as \code{landscape$spp}}
+#'   \item{upper.th}{Upper threshold of discrete intervals of fire size}
+#'   \item{freq}{Number of fires per class}
 #' }
+#' 
 "fire.size.dist.pt"
 
-#' Forest landscape features of a region in Catalonia
+#' Forest landscape features of the Biosphere Reserve Ger?s-Xur?s
 #'
-#' Landscape and forest stands characteristics of the study area in 2010 at 1 ha of spatial resolution 
+#' Landscape and forest stands characteristics of the study area in 2020 at 1 ha of spatial resolution 
 #'
-#' @format A data frame with as many rows as grid cells in the study area and 6 variables:
+#' @format A data frame with as many rows as grid cells in the study area and 3 variables:
 #' \describe{
 #'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{spp}{Tree species or land-cover types: 
-#'   1 - Pinus halepensis,
-#'   2 - Pinus nigra,
-#'   3 - Pinus pinea,
-#'   4 - Pinus sylvestris,
-#'   5 - Pinus pinaster,
-#'   6 - Pinus  uncinata,
-#'   7 - Abies alba,
-#'   8 - Quercus ilex,
-#'   9 - Quercus suber,
-#'   10	- Quercus faginea,
-#'   11	- Quercus humilis,
-#'   12	- Fagus sylvatica,
-#'   13	- Other trees,
-#'   14	- Shrubland,
-#'   15	- Alpine grass,
-#'   16	- Arable land,
-#'   17	- Permanent crops,
-#'   18	- Rock, Sand, Bare soil,
-#'   19	- Water,
-#'   20	- Urban, Roads}
-#'   \item{biom}{Basal area for forest stands (in m2/ha) and biomass for shrublands (in tonne/ha)}
-#'   \item{age}{Forest and shrub age, in year}
-#'   \item{typdist}{Type of the last disturbance, possible values are \code{highfire} for high-intensity wildfire, 
-#'   \code{lowfire} for low-intenstiy wildfire, \code{lchg.urb} for urbanization,
-#'   \code{lchg.agri} for agriculture conversion, \code{lchg.rabn} for rural abandonment,
-#'   \code{cut} for timber harvesting, \code{pb} for prescribed burn, \code{drght} for drought-induced mortality,
-#'   \code{afforest} for afforestation, and \code{encroach} for encroachment}
-#'   \item{tsdist}{Time since the last disturbance, in years}
+#'   \item{lct}{Tree species or land-cover types: pine, oak, water, shrub, sparseveg, crop, grass, urban}
+#'   \item{tschg}{Time since change (in years)}
 #' }
+#' 
 "landscape"
 
-#' Mask of the study area
+#' Induced landscape changes
 #'
-#' Binary raster to identify the study area (1 or NA) 
+#' Induced landscape changes: rural abandonment, agricultural conversion and smart plantations
 #'
-#' @format Raster of 2800 (nrow) x 2009 (ncol)
+#' @format A data frame with as many rows as grid cells in the study area and 3 variables:
 #' \describe{
-#' Raster of the study area (1 or NA) in the UTM31N - ETRS89 projection, at 1 ha of spatial resoltuion. 
-#' The unique grid cell identificator \code{cell.id} in the \code{landscape} data frame coincides with 
-#' the position of the location in the \code{mask} raster.
+#'   \item{SmartPlant}{Conversion rate for smart plantations} ############ AQUI N?O ? EM HA ##########
+#'   \item{AgriConver}{Conversion rate for agricultural conversion (in ha/year)}
+#'   \item{RuralAbnd}{Conversion rate for rural abandonment (in ha/year)}
 #' }
+#' 
 "lcc.demand"
 
 #' Mask of the study area
 #'
 #' Binary raster to identify the study area (1 or NA) 
 #'
-#' @format Raster of 2800 (nrow) x 2009 (ncol)
+#' @format Raster of 648 (nrow) x 791 (ncol)
 #' \describe{
-#' Raster of the study area (1 or NA) in the UTM31N - ETRS89 projection, at 1 ha of spatial resoltuion. 
+#' Raster of the study area (1 or NA) in the UTM29N - ETRS89 projection, at 1 ha of spatial resolution. 
 #' The unique grid cell identificator \code{cell.id} in the \code{landscape} data frame coincides with 
 #' the position of the location in the \code{mask} raster.
 #' }
+#' 
 "mask.study.area"
 
 #' Orography 
@@ -137,28 +105,34 @@
 #' @format A data frame with as many rows as grid cells in the study area and 8 variables:
 #' \describe{
 #'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{elev}{Elevation, in m}
+#'   \item{region}{\code{GZ} is Galicia and \code{PT} is Portugal)}
+#'   \item{protected}{protected status (\code{TRUE}/\code{FALSE})}
+#'   \item{elevation}{Elevation (in m)}
 #'   \item{aspect}{Aspect, 0 - flat, 1 - north, 2 - east, 3 - south, 4 - west}
-#'   \item{slope}{Slope, in º}
-#'   \item{radsol}{Solar radiation in summer, in kJ/(m2·day·mm)}
-#'   \item{road}{Distance to the road network, in m}
+#'   \item{dens.road}{density of roads (in m^2^)}
+#'   \item{slope}{Slope (in %)}
 #'   \item{utm}{Code of the 1K UTM grid}
-#'   \item{slope.stand}{Standarized slope?}
 #' }
+#' 
 "orography"
 
-#' Fire spread type and Main wind direction
+#' Post-fire transitions matrix
 #'
-#' FST & Probability wind directions
+#' Potential post-fire transitions calibrated for the study area ########## potencial ou preferencial ???????????
 #'
-#' @format A data frame with as many rows as grid cells in the study area and 6 variables:
+#' @format A data frame with as many rows as grid cells in the study area and 10 variables:
 #' \describe{
-#'   \item{cell.id}{Unique grid cell indentificator}
-#'   \item{pfst.wind}{Fire spread type is wind-driven}
-#'   \item{pfst.topo}{Fire spread type is topographic}
-#'   \item{pwind.n}{Probability (0-100) of north winds dominance}
-#'   \item{pwind.nw}{Probability (0-100) of north-west winds dominance}
-#'   \item{pwind.w}{Probability (0-100) of west winds dominance}
+#'   \item{lc.prefire}{Land-cover types}
+#'   \item{crop}{Croplands}
+#'   \item{grass}{Grasslands}
+#'   \item{shrub}{Shrublands}
+#'   \item{pine}{Pine forest}
+#'   \item{oak}{Oak forest}
+#'   \item{sparseveg}{Sparse vegetation and rocky areas}
+#'   \item{water}{Water}
+#'   \item{urban}{Urban}
+#'   \item{baresoil}{baresoil}
 #' }
+#' 
 "postfire.trans.matrix"
 

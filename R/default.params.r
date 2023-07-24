@@ -78,14 +78,14 @@ default.params = function(){
     
     ## Afforestation rates and age constrictions
     rewilding.th = 9, # Minimum years after any transition to shrubs become oak forest trought natural succession
-    rate.afforest.oak = 2.9, # Annual rate in 100% of shrub converting to oak (or 2.4 ??)
-    rate.afforest.pine = 2.1, # Annual rate in 100% of shrub converting to pine (or 1.1 ??)
+    rate.afforest.oak = 1.6, # Annual rate in 100% of shrub converting to oak 
+    rate.afforest.pine = 1.1, # Annual rate in 100% of shrub converting to pine
     radius.afforest.oak = 400, # Radius in m around a shrub location to find out oaks for the afforestation process
     radius.afforest.pine = 1000, # Radius in m around a shrub location to find out oaks for the afforestation process
     
     ## Encroachment rate and age constrictions
     shruby.th = 4,	 # Minimum years after any transition to rocky vegetation become shrublands
-    rate.encroach = 1.6, # Annual rate in 100% of rocky veg converting to shrub (or 0.7 ??)
+    rate.encroach = 0.7, # Annual rate in 100% of rocky veg converting to shrub
     # Radius around a a rocky location to find out shrubs, for the encroachment process
     radius.encroach = 120, # in cells --> 120m
     

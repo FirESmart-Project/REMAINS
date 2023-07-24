@@ -18,12 +18,12 @@ Each model scenario dictates which ecological and anthropogenic processes are ac
 7.	Vegetation encroachment  
 
 Thus, the current version of the model is implemented thought the following functions:  
-**afforestation**: simulates the colonization of scrublands by oak and pine species, occurs at a certain annual rate, only can take place after a period since the last land-cover transformation and depends on the percentage of oak and/or pine forest found in a circular neighborhood.  
+**afforestation**: simulates the colonization of shrublands by oak and pine species, occurs at a certain annual rate, only can take place after a period since the last land-cover transformation and depends on the percentage of oak and/or pine forest found in a circular neighborhood.  
 **default.params**: initializes the parameters and the global variables of the model.  
-**encroachment**: the vegetation encroachment is the transformation of rocky areas or open scrublands to close scrublands. 
+**encroachment**: the vegetation encroachment is the transformation of rocky areas or open shrublands to close shrublands. 
 **fire.risk**: simulates the fire risk areas as a function of various methodological parameters.  
 **forest.recover**: simulates the forest recovery (pine and oak) after fire (wildfire and prescribed fire) under a given period.   
-**interface**: assing the type of neighbourhood to each raster cell.  
+**interface**: assignment of the type of neighbourhood to each raster cell.  
 **land.cover.change**: simulates land-cover transitions (e.g. rural abandonment or forest conversion) following a demand allocation approach.  
 **land.dyn.mdl**: loads the spatial state variables, the initialization of model´s parameters, creates the scenario output sub-folder and schedules the processes, e.g., land-cover changes, wildfires, prescribed fire, vegetation dynamics.  
 **postfire.rege**: simulates forest regeneration after fire.  
@@ -32,7 +32,7 @@ Thus, the current version of the model is implemented thought the following func
 
 ## Package installation
 
-Users can download and install the latest stable version of the **medLDM** package from GitHub as follows (required package devtools should be installed/updated first):
+Users can download and install the latest stable version of the **REMAINS** package from GitHub as follows (required package devtools should be installed/updated first):
 
 ```R
 devtools::install_github("FirESmart-Project/REMAINS")
