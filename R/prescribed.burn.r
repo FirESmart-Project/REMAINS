@@ -151,8 +151,7 @@ prescribed.burn = function(land, params, out.maps = FALSE, verbose = FALSE){
         left_join(select(subland, cell.id, elevation), by=c("source.id"="cell.id")) %>% 
         mutate(elevation.source = elevation) %>% select(-elevation) 
       
-      ## Compute the spread rate and the probability of burning by ############ complete NURIA
-      ## - 
+      ## Compute the spread rate and the probability of burning 
       neigh.land = subland[subland$cell.id %in% neigh.id$cell.id, c("cell.id", "lct", "tschg", "elevation")] %>%  
         left_join(params$lct.fire.prone, by="lct") %>% 
         left_join(neigh.id, by="cell.id") %>% 

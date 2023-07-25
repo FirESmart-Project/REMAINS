@@ -18,9 +18,7 @@
 #' 
 
 wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
-  # wildfires = function(land, orography, coords, mask.study.area, burnt.area.dist.pt, fire.size.dist.pt, 
-  #                      burnt.area.dist.gz, fire.size.dist.gz, params, out.maps = FALSE, verbose = FALSE){
-     
+
   ## Initialize tracking variables
   fire.id = 0
   track.fires = NULL
@@ -157,10 +155,6 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
           left_join(select(subland, cell.id, lct, elevation, is.source.supp.fuel, is.source.supp.mosaic), by=c("source.id"="cell.id")) %>% 
           mutate(is.source.agri = (lct=="crop"), elevation.source = elevation) %>% select(-lct, -elevation) 
 
-        ## no need to filter for those cells that are not of the study area        
-        # neigh.id = rbind(neigh.id, data.frame(cell.id = 1, source.id = 2923415, dist=0, is.source.agri = F, elevation.source=622.7))
-        neigh.id  
-        
         ## Compute the spread rate and the probability of burning by 
         neigh.land = subland[subland$cell.id %in% neigh.id$cell.id, c("cell.id", "lct", "tschg", "elevation")] %>%  
           left_join(params$lct.fire.prone, by="lct") %>% 
@@ -179,7 +173,6 @@ wildfires = function(land, params, out.maps = FALSE, verbose = FALSE){
           mutate(tosupp.fuel=(is.source.supp.fuel | sr<=fuel.th), 
                  tosupp.mosaic=(is.source.supp.mosaic | agri.front>=mosaic.th))
         sprd.rate$burn = sprd.rate$pb >= runif(nrow(sprd.rate), params$pb.lower.th, params$pb.upper.th)
-        sprd.rate
         
         ## Record in 'subland' the suppression state of future source cells
         ## Suppression by mosaic has a prevalence over suppression by low fuel load

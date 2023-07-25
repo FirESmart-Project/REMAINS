@@ -23,13 +23,13 @@
 
 interface = function(land, params){
   
-  ## Traking
+  ## Tracking
   cat(" Land interfaces", "\n")
   
-  ## Join utm info to land
+  ## Join UTM info to land
   land.utm = left_join(land, select(orography, cell.id, utm), by="cell.id") 
   
-  ## Count each land type per utm, compute percentages
+  ## Count each land-cover type per UTM, compute percentages
   landtype = aggregate(list(tot = (!is.na(land.utm$lct)),
                             urb = (land.utm$lct=="urban"), 
                             crp = (land.utm$lct=="crop"),
@@ -39,7 +39,7 @@ interface = function(land, params){
                        list(utm=land.utm$utm), sum)
   landtype[,3:ncol(landtype)] = 100*landtype[,3:ncol(landtype)]/landtype$tot
   
-  ## Apply rules to classify: first step of classification in neighbour types
+  ## Apply rules to classify: first step of classification in neighbor types
   dta = data.frame(utm=landtype$utm,
                    urb=landtype$urb>=80, crp=landtype$crp>=80, shrb=landtype$shrb>=80,
                    frst=landtype$frst>=80, oth=landtype$oth>=80)

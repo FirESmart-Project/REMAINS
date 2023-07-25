@@ -26,7 +26,7 @@
   nneigh = apply(neigh.id$nn.dists[,-1] <= dist.th, 1, sum, na.rm=T) 
   ptrans = (ptrans/nneigh)^(1/5)
   
-  ## Either returns the probability of transition of each neighbor (numeric = TRUE)
+  ## Either it returns the probability of transition of each neighbor (numeric = TRUE)
   ## or a TRUE / FALSE vector resulting from comparing ptrans with random numbers (numeric = FALSE)
   if(numeric){
     return(ptrans)

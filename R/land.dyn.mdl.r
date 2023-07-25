@@ -118,7 +118,7 @@
 #'         \item{\code{year}: Year YYYY.}
 #'         \item{\code{age}: Age (in years).}
 #'         \item{\code{area}: Area (in ha).}
-##'       }
+#'       }
 #'    }
 #'    \item{\code{unburnt.pine.age}: A data frame with unburnt pine forest per age 
 #'    (included if \code{is.wildfire}), with columns:
@@ -220,11 +220,10 @@
 #' }
 #'
 
-land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE,
-                        is.prescribed.burn = TRUE, is.postfire.rege = TRUE, is.forest.recover = TRUE,
-                        is.afforestation = TRUE, is.encroachment = TRUE, nrun = 1, params = NULL, 
-                        lcc.demand = NULL, save.land = FALSE, out.maps = FALSE, write.outputs = FALSE, 
-                        verbose = FALSE){
+land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE, is.prescribed.burn = TRUE, 
+                        is.postfire.rege = TRUE, is.forest.recover = TRUE, is.afforestation = TRUE, 
+                        is.encroachment = TRUE, nrun = 1, params = NULL, lcc.demand = NULL, 
+                        save.land = FALSE, out.maps = FALSE, write.outputs = FALSE, verbose = FALSE){
 
   
   options(dplyr.summarise.inform=F)
@@ -254,7 +253,7 @@ land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE
   ## Build the baseline time sequence and the time sequence of the processes (shared for all runs). 
   ## 1. Climate change, 2. Land-cover changes, 3. Forest management
   ## 4. Wildfires, 5. Prescribed burns, 6. Drought, 7. Post-fire regeneration,
-  ## 8. Cohort establihsment, 9. Afforestation, 10. Growth
+  ## 8. Cohort establishment, 9. Afforestation, 10. Growth
   time.seq = seq(1, params$time.horizon, params$time.step)
   lchg.schedule = seq(1, params$time.horizon, params$time.step)
   fire.schedule = seq(1, params$time.horizon, params$time.step)
@@ -290,13 +289,13 @@ land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE
   ## Assign default prob.fire = 1 to all cells 
   landscape$prob.fire = 1 
   
-  ## Compute the buffer around road network if the pb strategy is roadnet
+  ## Compute the buffer around road network if the prescribed burnt strategy is roadnet
   if(params$pb.strategy == "roadnet"){
     if(is.null(params$buffroad.file)){
       cat(paste0("Build buffer of ", params$buffer.roadnet, "m around the road network\n"))
       road.raster = mask.study.area
       dta = data.frame(cell.id = 1:ncell(road.raster)) %>% left_join(orography, by="cell.id")
-      road.raster[] = dta$road  # NA where there is no Roads !!!!!!
+      road.raster[] = dta$road  # assign NA where there is no Roads 
       if(params$buffer.roadnet==0)
         stop("Width of the buffer around the road network needs to be positive")
       buff = buffer(road.raster, width=params$buffer.roadnet)  # 1 within the buffer, NA otherwise
@@ -653,7 +652,6 @@ land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE
   if(is.land.cover.change){
     lcc.demand$year = as.numeric(row.names(lcc.demand))
     lcc.demand = pivot_longer(lcc.demand, cols=SmartPlant:PastureAbnd, names_to="trans.type", values_to="trgt.dmnd")
-    # track.lcc = track.lcc %>% left_join(lcc.demand, by = c("year", "trans.type"))
   }
   
   ## List of tracking data frames

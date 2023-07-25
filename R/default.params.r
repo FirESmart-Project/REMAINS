@@ -24,14 +24,13 @@ default.params = function(){
     
     ## Land-cover types
     land.cover.type = data.frame(lct.id = 1:10, lct = c("crop", "pine", "oak", "sparseveg", "shrub",
-      "water", "grass", "urban", "shrub.to.pine", "shrub.to.oak")),  # lct was lc.name
+      "water", "grass", "urban", "shrub.to.pine", "shrub.to.oak")),  
                 
     ## Interfaces
     interfaces = data.frame(inter.id = 1:11, inter.name = c("urb", "crp", "shrb", "frst", 
       "oth", "urbcrp", "urbshrb", "urbfrst", "crpshrb", "crpfrst", "shrbfrst")),
     
     ## Land-cover type fire proneness
-    # lct.fire.prone = c(0.29, 0.94, 0.9, 0.52, 1, 0, 0, 0.94, 0.94),
     lct.fire.prone = data.frame(lct = c("crop", "pine", "oak", "sparseveg", "shrub",
                                         "water", "grass", "urban", "shrub.to.pine", "shrub.to.oak"),
                                 flam = c(0.29, 0.94, 0.94, 0.9, 0.52, 1, 0, 0, 0.94, 0.94)),
@@ -87,7 +86,7 @@ default.params = function(){
     shruby.th = 4,	 # Minimum years after any transition to rocky vegetation become shrublands
     rate.encroach = 0.7, # Annual rate in 100% of rocky veg converting to shrub
     # Radius around a a rocky location to find out shrubs, for the encroachment process
-    radius.encroach = 120, # in cells --> 120m
+    radius.encroach = 120, # Radius in m 
     
     ## Post-fire
     is.contagion = FALSE, # Activate or deactivate the post-fire regeneration by contagion

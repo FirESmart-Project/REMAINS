@@ -85,14 +85,12 @@ land.cover.change = function(land, params, lc.trans = 1, trgt.dmnd = 0, visit.ce
   ligni = params$lc.alloc[2, lc.trans]
   lsprd = params$lc.alloc[3, lc.trans]
   
-  
   ## Choose according to trans.pot and lc.source as many cells as target demand to potentially start 
   ## clusters of change. For ignition points, wt is as wt.ini.
   ## Remove cells that have been already changed by other land-cover transitions
   chg = data.frame(cell.id=sample(land$cell.id, size=trgt.dmnd, p=trans.pot*lc.source, replace = F)) %>%
          mutate(wt.ini = rexp(trgt.dmnd, rate=ligni)) %>% mutate(wt=wt.ini) %>%
          filter(cell.id %notin% visit.cells)
-  
   
   ## Select around 20% of cells to start a cluster (at least one cell) according to wt.ini
   if(nrow(chg)>1){
@@ -101,11 +99,9 @@ land.cover.change = function(land, params, lc.trans = 1, trgt.dmnd = 0, visit.ce
     front = chg$cell.id
   }
   
-  
   ## Make effective the change
   achg = length(front)
   chg.cells = front 
-  
 
   ## Keep spreading the change until area changed is at least as target demand
   while(achg <= trgt.dmnd){
