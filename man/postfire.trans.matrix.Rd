@@ -3,22 +3,26 @@
 \docType{data}
 \name{postfire.trans.matrix}
 \alias{postfire.trans.matrix}
-\title{Fire spread type and Main wind direction}
+\title{Post-fire transitions matrix}
 \format{
-A data frame with as many rows as grid cells in the study area and 6 variables:
+A data frame with as many rows and columns as land-cover types in the study area:
 \describe{
-  \item{cell.id}{Unique grid cell indentificator}
-  \item{pfst.wind}{Fire spread type is wind-driven}
-  \item{pfst.topo}{Fire spread type is topographic}
-  \item{pwind.n}{Probability (0-100) of north winds dominance}
-  \item{pwind.nw}{Probability (0-100) of north-west winds dominance}
-  \item{pwind.w}{Probability (0-100) of west winds dominance}
+  \item{lc.prefire}{Land-cover types}
+  \item{crop}{Croplands}
+  \item{grass}{Grasslands}
+  \item{shrub}{Shrublands}
+  \item{pine}{Pine forest}
+  \item{oak}{Oak forest}
+  \item{sparseveg}{Sparse vegetation and rocky areas}
+  \item{water}{Water}
+  \item{urban}{Urban}
+  \item{baresoil}{baresoil}
 }
 }
 \usage{
 postfire.trans.matrix
 }
 \description{
-FST & Probability wind directions
+Post-fire transition rates calibrated for the study area
 }
 \keyword{datasets}

@@ -3,25 +3,18 @@
 \docType{data}
 \name{burnt.area.dist.pt}
 \alias{burnt.area.dist.pt}
-\title{Timber harvesting allocation}
+\title{Annual area burnt in Portugal}
 \format{
-A data frame with as many rows as grid cells in the study area and 6 variables:
+A data frame with as many rows as grid cells in the study area and 2 variables:
 \describe{
-  \item{cell.id}{Unique grid cell indentificator}
-  \item{enpe}{Code of the protection status: 0 - none, 1 - national park, 2 - natural park, 
-  3 - Natural place of national interest, 4 - Wildlife nature reserve, 5 - Integral natural reserve,
-  6 - Partial natural reserve, 7 - Peripheral protection zone of a national park, 
-  8 - Peripheral protection zone of a natural park, 9 - Peripheral protection zone of a natural place}
-  \item{dist.path}{Distance to the nearest road or forest track, in m}
-  \item{slope.pctg}{Stand slope, in /100}
-  \item{dist.industry}{Distance to the nearest wood transformation industry, in km}
-  \item{dist.biomass}{Distance to the nearest biomass plant, in km}
+  \item{upper.th}{Upper threshold of discrete intervals of annual area burnt}
+  \item{freq}{Number of fires per class}
 }
 }
 \usage{
 burnt.area.dist.pt
 }
 \description{
-Landscape variables influencing the allocation of sylvicultural prescriptions
+Discrete distribution of annual area burnt in Portugal observed between 1980-2016
 }
 \keyword{datasets}

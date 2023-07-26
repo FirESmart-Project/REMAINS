@@ -11,11 +11,6 @@ interface(land, params)
 time since last cover-change}
 
 \item{params}{List of the parameters of the model}
-
-\item{orography}{Data frame with the geographic data of the raster cells: cell identifier, region 
-(\code{GZ} is Galicia and \code{PT} is Protugal), protected (\code{TRUE}/\code{FALSE}), elevation (in m), aspect
- (1 - north, 2 - east, 3 - south, 4 - west), dens.road (density of roads per km^2^), slope (in %), and utm 
- (code of the UTM 1x1 grid).}
 }
 \value{
 Returns a vector with the interface category: Urb = 1, Crp = 2, Shrb = 3, Frst = 4, Oth = 5,
@@ -30,8 +25,7 @@ of the distribution of the land-cover types within the neighborhood
 }
 \examples{
 data(landscape)
-data(orography)
 params = default.params()
-res = interface(landscape, orography, params)
+res = interface(landscape, params)
 
 }

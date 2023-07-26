@@ -54,177 +54,203 @@ land.dyn.mdl(
 \item{verbose}{A flag to prompt extra information}
 }
 \value{
-A list with the following 13 items:
+A list with the following 18 items:
  \itemize{
-   \item{\code{Land}: A data frame of tree species abundance, volume under bark, volume with bark, 
-   and carbon stock per age class, and area per non-forest land-cover types, with columns:
+   \item{\code{Land}: A data frame with the land-cover types areas, with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of the tree species or land-cover type.}
-        \item{\code{age.class}: Code of the age class: young, mature, or old.}
+        \item{\code{lct}: Land-cover type.}
         \item{\code{area}: Area (in ha).}
-        \item{\code{vol}: Volume under bark in \eqn{m^{3}} for tree species and biomass in tonnes for shrublands.}
-        \item{\code{volbark}: Volume with bark in \eqn{m^{3}}.}
-        \item{\code{carbon}: Carbon content (in Mg).}
       }
    }
-   \item{\code{LandSQI}: A data frame of area and volumes per tree species and per SQI, with columns:
+   \item{\code{lcc}: A data frame of land-cover transformations or conversions 
+   (included if \code{is.land.cover.change}), with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of the tree species or land-cover type.}
-        \item{\code{sqi}: Code of SQI: 1 - low, 2 - good, 3 - optimal.}
+        \item{\code{trans.type}: Transformation type: Rural abandonment, Pasture abandonment, Agricultural conversion, Pasture conversion and/or Smart plantation.}
+        \item{\code{region}: Region: Portugal - PT and Spain - GZ.}
         \item{\code{area}: Area (in ha).}
-        \item{\code{vol}: Volume under bark in \eqn{m^{3}}.}
-        \item{\code{volbark}: Volume with bark in \eqn{m^{3}}.}
+        \item{\code{trgt.dmnd}: Target demand (in ha).}
       }
    }
-   \item{\code{Carbon}: A data frame of carbon emissions and generation per type of process
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{type}: Process involved in the generation or emission of Carbon dioxide.}
-        \item{\code{carbon}: Carbon dioxide quantity in \eqn{g}.}
-      }
-   }
-   \item{\code{Harvest}: A data frame of sawlog and wood volume harvested per species 
-   (included if \code{is.harvesting}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of the species.}
-        \item{\code{vol.sawlog}: Harvested timber volume for sawlog in \eqn{m^{3}}.}
-        \item{\code{vol.wood}: Harvested timber volume for wood in \eqn{m^{3}}.}         
-      }
-   }
-   \item{\code{ForestArea}: A data frame of areas for sustainable timber harvesting
-   (included if \code{is.harvesting}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{forest}: Area of all tree species.}
-        \item{\code{spp.harvestable}: Area of harvestable tree species.}
-        \item{\code{non.protect}: Harvestable area without any protection status.}
-        \item{\code{national.park}: Harvestable area in a national park.}
-        \item{\code{enpe}: Harvestable area protected, but not in a national park.}
-        \item{\code{no.park}: Harvestable area not in a national park.}
-        \item{\code{slope30.nopark}: Harvestable area not in a national park with slope <= 30 pct.}
-        \item{\code{slope30.nopark.distpath1.5}: Harvestable area not in a national park with slope <= 30 pct and distance to roads or forest tracks <= 1.5 km.}
-        \item{\code{slope30.nopark.distpath2.2}: Harvestable area not in a national park with slope <= 30 pct and distance to roads or forest tracks <= 2.2 km.}
-      }
-   }
-   \item{\code{HarvestArea}: A data frame of area harvested per sylvicultural prescription and forest type    
-   (included if \code{is.harvesting}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{todo}: Sylvicultural prescription: prep.cut, removal.cut, seed.cut, or thinning.}
-        \item{\code{fytpe}: Forest type: conif or decid.}
-        \item{\code{area}: Area in ha.}
-      }
-   }
-   \item{\code{HarvestVolume}: A data frame of potential and total volum extracted per forest type
-   (included if \code{is.harvesting}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{fytpe}: Forest type: conif or decid.}
-        \item{\code{vol.potential.extract.sawlog}: Potential harvesting volume for sawlog in \eqn{m^{3}}.}
-        \item{\code{vol.potential.extract.wood}: Potential harvesting volume for Wood in \eqn{m^{3}}.}     
-        \item{\code{vol.extract.sawlog}: Harvested volume for sawlog in \eqn{m^{3}}.}
-        \item{\code{vol.extract.wood}: Harvested volume for wood in \eqn{m^{3}}.}
-        \item{\code{pct.sawlog}: Percentage of harvested volume for sawlog.}
-        \item{\code{pct.wood}: Percentage of harvested volume for wood.}     
-      }
-   }
-   \item{\code{Fires}: A data frame of target, burnt and suppresed area per fire
+   \item{\code{Fires}: A data frame of target, burnt and suppressed area per wildfire
    (included if \code{is.wildfire}), with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{swc}: Synoptic weather condition: 1 - wind, 2 - heat, 3 - regular.}
-        \item{\code{clim.sever}: Climatic severity: 0 - mild, 1 - severe, 2 - extreme.}
+        \item{\code{region}: Event locations: Portugal and Spain.}
         \item{\code{fire.id}: Fire event identificator.}
-        \item{\code{fst}: Fire spreading type: 1 - wind-driven, 2 - convective, 3 - topographic.}
-        \item{\code{wind}: Main wind direction in degrees.}
         \item{\code{atarget}: Target area to be burnt (in ha).}
-        \item{\code{aburnt.highintens}: Area burnt in high intensity (in ha).}
-        \item{\code{aburnt.lowintens}: Area brunt in low intensity (in ha).}
-        \item{\code{asupp.fuel}: Area suppressed in low-fuel conditions (in ha).}
-        \item{\code{asupp.sprd}: Area suppressed in slow fire spread conditions (in ha).}
-        \item{\code{rem}: Remanent area, not burnt, neither suppressed (in ha).}
+        \item{\code{aburnt}: Area burnt (in ha).}
+        \item{\code{asupp.fuel}: Area suppressed in low fire spread conditions (in ha).} 
+        \item{\code{asupp.mosaic}: Area suppressed due to the suppression opportunities created by croplands (in ha).} 
+        \item{\code{rem}: Remaining area, not burnt, neither suppressed (in ha).}    
       }
    }
-   \item{\code{BurntSpp}: A data frame of burnt area and biomass per species or land-cover type
+   \item{\code{lc.burnt.supp}: A data frame of burned and suppressed land-cover types 
    (included if \code{is.wildfire}), with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{fire.id}: Fire event identificator.}
-        \item{\code{spp}: Code of the tree species or land-cover type.}
-        \item{\code{aburnt}: Area effectively burnt (in ha).}
-        \item{\code{bburnt}: Basal area effectively burnt (in \eqn{m^{2}ha^{-1}}).}
-      }
-   }
-   \item{\code{PostFire}: A data frame of species replacement after fire
-   (included if \code{is.wildfire}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{spp.out}: Code of the tree species or land-cover type replaced.}
-        \item{\code{spp.in}: Code of the tree species or land-cover type after replacement.}
-        \item{\code{area}: Area (in ha).}
-      }
-   }
-   \item{\code{Drought}: A data frame of drought-induced mortality per tree species
-   (included if \code{is.drought}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of the tree species.}
-        \item{\code{area}: Area (in ha).}
-      }
-   }
-   \item{\code{Cohort}: A data frame of species replacement after drought-induced mortality 
-   (included if \code{is.cohort.establish}), with columns:
-     \itemize{
-        \item{\code{run}: Number of replicate.}
-        \item{\code{year}: Year YYYY.}
-        \item{\code{spp.out}: Code of the tree species replaced.}
-        \item{\code{spp.in}: Code of the tree species or land-cover type after replacement.}
-        \item{\code{area}: Area (in ha).}
+        \item{\code{region}: Region: Portugal and Spain.}
+        \item{\code{lct}: Land-cover type.}
+        \item{\code{target}: Target area to be burnt (in ha).} 
+        \item{\code{burnt}: Area effectively burnt (in ha).}
+        \item{\code{supp}: Area effectively suppressed (in ha).}
       }
    }   
-   \item{\code{Afforest}: A data frame of new tree species following shrubland colonization
-   (included if \code{is.afforestation}), with columns:
+    \item{\code{lc.burnt}: A data frame of burned land-cover types 
+   (included if \code{is.wildfires}), with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of the tree species.}
+        \item{\code{region}: Region: Portugal and Spain.}
+        \item{\code{lct}: Land-cover type.}
+        \item{\code{target}: Target area to be burnt (in ha).} 
+        \item{\code{burnt}: Area effectively burnt (in ha).}
+        \item{\code{supp}: Area effectively suppressed (in ha).}
+      }
+   }
+   \item{\code{unburnt.land}: A data frame of unburned area by land-cover type
+   (included if \code{is.wildfire}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{lct}: Land-cover type.}
         \item{\code{area}: Area (in ha).}
       }
    }
-   \item{\code{Encroach}: A data frame of new shrubland area following encroachment
+   \item{\code{Forest.age.burnt}: A data frame with the count burned pines and oaks by region and age
+   (included if \code{is.wildfire}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{region}: Region: Portugal and Spain.}
+        \item{\code{lct}: Land-cover type.}
+        \item{\code{age}: Age (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{Forest.age.supp}: A data frame with the count suppressed pines and oaks by region and age
+   (included if \code{is.wildfire}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{region}: Region: Portugal and Spain.}
+        \item{\code{lct}: Land-cover type.}
+        \item{\code{age}: TAge (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{unburnt.aok.age}: A data frame with unburnt oak forest per age
+   (included if \code{is.wildfire}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{age}: Age (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{unburnt.pine.age}: A data frame with unburnt pine forest per age 
+   (included if \code{is.wildfire}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{age}: Age (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{pb}: A data frame with the area burned by prescribed fire
+   (included if \code{is.prescribed.burn}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{fire.id}: Fire event identificator.}
+        \item{\code{atarget}: Target area to be burnt (in ha).}
+        \item{\code{aburnt}: Area effectively burnt by prescribed fires(in ha).}
+      }
+   }
+   \item{\code{lc.pburnt}: A data frame with prescribed fire areas by land-cover types 
+   (included if \code{is.prescribed.burn}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{lct}: Land-cover type burned by prescribed fire.}
+        \item{\code{tschg}: Time since the last land-cover transition (in years).}
+        \item{\code{aburnt}: Area effectively burnt (in ha).}
+      }
+   }
+   \item{\code{postfire.rege}: A data frame of post-fire regeneration by land-cover type
+   (included if \code{is.postfire.rege}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{lct}: Land-cover type.}
+        \item{\code{post.lct}: Land-cover type post-fire.}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{Forest.recover}: A data frame of potential forest recovering from shrublands
+   (included if \code{is.forest.recover}), with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{current.shrub.to.pine}: Burnt area of shrubland in the current time step that will convert to pine forest in the following years (in ha).}
+        \item{\code{current.shrub.to.oak}: Burnt area of shrubland in the current time step that will convert to oak forest in the following years (in ha).}
+        \item{\code{convert.to.pine}: Shrubland area that convert/transform to pine forest (in ha).}
+        \item{\code{convert.to.oak}: Shrubland area that convert/transform to oak forest (in ha).}
+      }
+   }
+    \item{\code{Afforest}: A data frame with the colonization of shrublands by oak and/or pines species
+   (included if \code{is.afforestation}), with columns:
+     \itemize{
+        \item{\code{year}: Year YYYY.}
+        \item{\code{potential.shrub}: Area (in ha).}
+        \item{\code{target.afforest.oak}: Area (in ha).}
+        \item{\code{target.afforest.pine}: Area (in ha).}
+        \item{\code{afforest.oak}: Area (in ha).}
+        \item{\code{afforest.oak}: Area (in ha).}
+      }
+   }
+   \item{\code{oak.age}: A data frame of oak forest per age with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{age}: Age (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+   \item{\code{pine.age}: A data frame of pine forest per age with columns:
+     \itemize{
+        \item{\code{run}: Number of replicate.}
+        \item{\code{year}: Year YYYY.}
+        \item{\code{age}: Age (in years).}
+        \item{\code{area}: Area (in ha).}
+      }
+   }
+    \item{\code{Encroach}: A data frame of new shrubland area following encroachment
    (included if \code{is.encroachment}), with columns:
      \itemize{
         \item{\code{run}: Number of replicate.}
         \item{\code{year}: Year YYYY.}
-        \item{\code{spp}: Code of shrublands.}
-        \item{\code{area}: Area (in ha).}
+        \item{\code{potential.rocky}: Area (in ha).}
+        \item{\code{target.encroach}: Area (in ha).}
+        \item{\code{encroach}: Area (in ha).}
       }
     }
  }
 }
 \description{
-Run the REMAINS model that includes the processes of land-cover changes, wildfires, prescribed burns, 
+Run the REMAINS model that includes the processes of land-cover changes, wildfires, prescribed fires, 
 and vegetation dynamics in mountain landscapes.
 }
 \examples{
 
 \dontrun{
-library(medLDM)
-# Run one single 90-year replicate with forest management
+library(REMAINS) 
+# Run one single 2020 replicate with forest management 
 result = land.dyn.mdl(is.harvest = T)
 }
 

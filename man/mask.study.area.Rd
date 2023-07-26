@@ -5,9 +5,9 @@
 \alias{mask.study.area}
 \title{Mask of the study area}
 \format{
-Raster of 2800 (nrow) x 2009 (ncol)
+Raster of 648 (nrow) x 791 (ncol)
 \describe{
-Raster of the study area (1 or NA) in the UTM31N - ETRS89 projection, at 1 ha of spatial resoltuion. 
+Raster of the study area (1 or NA) in the UTM29N - ETRS89 projection, at 1 ha of spatial resolution. 
 The unique grid cell identificator \code{cell.id} in the \code{landscape} data frame coincides with 
 the position of the location in the \code{mask} raster.
 }

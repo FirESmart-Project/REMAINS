@@ -11,8 +11,6 @@ afforestation(land, params)
 time since last cover-change}
 
 \item{params}{List of the parameters of the model}
-
-\item{coords}{Data frame with the identifier and coordinates of the raster cells}
 }
 \value{
 Returns a list of two vectors with cells' identifiers afforested by oaks and pines, respectively, 
@@ -23,8 +21,7 @@ Simulation of afforestation in shrublands
 }
 \examples{
 data(landscape)
-data(coords)
 params = default.params()
-res = afforestation(landscape, coords, params)
+res = afforestation(landscape, params)
 
 }

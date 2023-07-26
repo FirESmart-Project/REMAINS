@@ -16,16 +16,11 @@ time since last cover-change}
 \item{params}{List of the parameters of the model}
 
 \item{out.maps}{A flat to save maps as .tif files of wildfire identifier, wildfire step and fire risk}
-
-\item{orography}{Data frame with the geographic data of the raster cells: cell identifier, region 
-(\code{GZ} is Galicia and \code{PT} is Protugal), protected (\code{TRUE}/\code{FALSE}), elevation (in m), aspect
- (1 - north, 2 - east, 3 - south, 4 - west), dens.road (density of roads per km^2^), slope (in %), and utm 
- (code of the UTM 1x1 grid).}
 }
 \value{
 Returns a vector with cells' identifiers to change the land-cover type
 
-Returns a vector with cells' identifiers burnt, suppresed
+Returns a vector with cells' identifiers burnt, suppressed
 }
 \description{
 Simulation of post-fire regeneration in forest areas
@@ -34,7 +29,6 @@ Simulation of wildfires
 }
 \examples{
 data(landscape)
-data(orography)
 data(postfire.trans.matrix)
 params = default.params()
 landscape$trans.type = NA 
@@ -42,7 +36,7 @@ x = landscape$cell.id[landscape$lct \%in\% c("pine", "oak")]
 y = sample(x, 100, replace=F)
 landscape$trans.type[landscape$cell.id \%in\% y] = "Fire"
 landscape$tschg[landscape$cell.id \%in\% y] = 0
-res = postfire.rege(landscape, orography, params)
+res = postfire.rege(landscape, params)
 
 data(landscape)
 params = default.params()

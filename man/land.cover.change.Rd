@@ -19,18 +19,11 @@ time since last cover-change}
 \item{params}{List of the parameters of the model}
 
 \item{lc.trans}{Identifier of the land-cover transition: 1 - smart plantation, 2 - agriculture conversion, 
-3 - rurla abandonment, and 4 - pasture abanonment.}
+3 - rural abandonment, and 4 - pasture abandonment.}
 
-\item{trgt.dmnd}{Number of hecatres to be converted to the target land-cover type}
+\item{trgt.dmnd}{Number of hectares to be converted to the target land-cover type}
 
 \item{visit.cells}{Vector of cells' identifier that have already been subject of change for a land-cover change process}
-
-\item{orography}{Data frame with the geographic data of the raster cells: cell identifier, region 
-(\code{GZ} is Galicia and \code{PT} is Protugal), protected (\code{TRUE}/\code{FALSE}), elevation (in m), aspect
- (1 - north, 2 - east, 3 - south, 4 - west), dens.road (density of roads per km^2^), slope (in %), and utm 
- (code of the UTM 1x1 grid).}
-
-\item{coords}{Data frame with the identifier and coordinates of the raster cells}
 }
 \value{
 Returns a vector with cells' identifiers to change the land-cover type
@@ -40,9 +33,7 @@ Simulation of land-cover changes
 }
 \examples{
 data(landscape)
-data(orography)
-data(coords)
 params = default.params()
-res = land.cover.change(landscape, orography, coords, params, 1, 100, NULL)
+res = land.cover.change(landscape, params, 1, 100, NULL)
 
 }

@@ -16,6 +16,6 @@ A data frame with as many rows as grid cells in the study area and 3 variables:
 coords
 }
 \description{
-Coordinates x and y in UTM31N-ETRS89 of the 1 ha cells in the study area.
+Coordinates x and y in UTM29N-ETRS89 of the 1 ha cells in the study area
 }
 \keyword{datasets}

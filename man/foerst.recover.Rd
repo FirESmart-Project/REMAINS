@@ -18,8 +18,6 @@ time since last cover-change}
 \item{shrub2oak}{Vector to accumulate the number of shrub.to.oak cells that have to transform to oak each time step}
 
 \item{t}{Value of the current time step}
-
-\item{coords}{Data frame with the identifier and coordinates of the raster cells}
 }
 \value{
 Returns a list with (1) a vector of cells' identifiers that have transformed to pine, (2) a vector of cell's 
@@ -32,9 +30,8 @@ Simulation of encroachment in sparse vegetation
 }
 \examples{
 data(landscape)
-data(coords)
 params = default.params()
 shrub2pine = shrub2oak = numeric(length=params$time.horizon+8)
-res = forest.recover(landscape, coords, params, shrub2pine, shrub2oak, 1)
+res = forest.recover(landscape, params, shrub2pine, shrub2oak, 1)
 
 }

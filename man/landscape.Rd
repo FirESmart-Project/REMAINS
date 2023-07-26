@@ -3,46 +3,19 @@
 \docType{data}
 \name{landscape}
 \alias{landscape}
-\title{Forest landscape features of a region in Catalonia}
+\title{Forest landscape features of the Biosphere Reserve Ger?s-Xur?s}
 \format{
-A data frame with as many rows as grid cells in the study area and 6 variables:
+A data frame with as many rows as grid cells in the study area and 3 variables:
 \describe{
   \item{cell.id}{Unique grid cell indentificator}
-  \item{spp}{Tree species or land-cover types: 
-  1 - Pinus halepensis,
-  2 - Pinus nigra,
-  3 - Pinus pinea,
-  4 - Pinus sylvestris,
-  5 - Pinus pinaster,
-  6 - Pinus  uncinata,
-  7 - Abies alba,
-  8 - Quercus ilex,
-  9 - Quercus suber,
-  10	- Quercus faginea,
-  11	- Quercus humilis,
-  12	- Fagus sylvatica,
-  13	- Other trees,
-  14	- Shrubland,
-  15	- Alpine grass,
-  16	- Arable land,
-  17	- Permanent crops,
-  18	- Rock, Sand, Bare soil,
-  19	- Water,
-  20	- Urban, Roads}
-  \item{biom}{Basal area for forest stands (in m2/ha) and biomass for shrublands (in tonne/ha)}
-  \item{age}{Forest and shrub age, in year}
-  \item{typdist}{Type of the last disturbance, possible values are \code{highfire} for high-intensity wildfire, 
-  \code{lowfire} for low-intenstiy wildfire, \code{lchg.urb} for urbanization,
-  \code{lchg.agri} for agriculture conversion, \code{lchg.rabn} for rural abandonment,
-  \code{cut} for timber harvesting, \code{pb} for prescribed burn, \code{drght} for drought-induced mortality,
-  \code{afforest} for afforestation, and \code{encroach} for encroachment}
-  \item{tsdist}{Time since the last disturbance, in years}
+  \item{lct}{Tree species or land-cover types: pine, oak, water, shrub, sparseveg, crop, grass, urban}
+  \item{tschg}{Time since change (in years)}
 }
 }
 \usage{
 landscape
 }
 \description{
-Landscape and forest stands characteristics of the study area in 2010 at 1 ha of spatial resolution
+Landscape and forest stands characteristics of the study area in 2020 at 1 ha of spatial resolution
 }
 \keyword{datasets}

@@ -3,20 +3,18 @@
 \docType{data}
 \name{fire.size.dist.pt}
 \alias{fire.size.dist.pt}
-\title{1993 - 2017 Land-cover changes}
+\title{Fire size distribution in Portugal}
 \format{
-A data frame with as many rows as grid cells in the study area and 2 variables:
+A data frame with two variables:
 \describe{
-  \item{cell.id}{Unique grid cell indentificator}
-  \item{code}{Code made by merging the 2-digits code of the land-cover type in 1993 
-  to the 2-digits code of the land-cover code in 2017. The 20-categories legend is as \code{landscape$spp}}
+  \item{upper.th}{Upper threshold of discrete intervals of fire size}
+  \item{freq}{Number of fires per class}
 }
 }
 \usage{
 fire.size.dist.pt
 }
 \description{
-Codification of the land-cover changes occurred between 1993 and 2017 based on the 
-20-categories legend of the Land Cover Map of Catalonia
+Discrete distribution of annual area burnt in Portugal observed between 1980-2016
 }
 \keyword{datasets}

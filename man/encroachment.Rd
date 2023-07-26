@@ -11,8 +11,6 @@ encroachment(land, params)
 time since last cover-change}
 
 \item{params}{List of the parameters of the model}
-
-\item{coords}{Data frame with the identifier and coordinates of the raster cells}
 }
 \value{
 Returns a list of one vector with cells' identifiers colonized by shrublands and a data frame 
@@ -23,8 +21,7 @@ Simulation of encroachment in sparse vegetation
 }
 \examples{
 data(landscape)
-data(coords)
 params = default.params()
-res = encroachment(landscape, coords, params)
+res = encroachment(landscape, params)
 
 }

@@ -15,7 +15,7 @@ time since last cover-change}
 \item{out.maps}{A flat to save maps as .tif files of wildfire identifier, wildfire step and fire risk}
 }
 \value{
-Returns a vector with cells' identifiers burnt, suppresed
+Returns a vector with cells' identifiers burnt, suppressed
 }
 \description{
 Simulation of prescribed burns

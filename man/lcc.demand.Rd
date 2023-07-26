@@ -3,19 +3,19 @@
 \docType{data}
 \name{lcc.demand}
 \alias{lcc.demand}
-\title{Mask of the study area}
+\title{Induced landscape changes}
 \format{
-Raster of 2800 (nrow) x 2009 (ncol)
+A data frame with as many rows as grid cells in the study area and 3 variables:
 \describe{
-Raster of the study area (1 or NA) in the UTM31N - ETRS89 projection, at 1 ha of spatial resoltuion. 
-The unique grid cell identificator \code{cell.id} in the \code{landscape} data frame coincides with 
-the position of the location in the \code{mask} raster.
+  \item{SmartPlant}{Conversion rate for smart plantations: oaks spp (in ha/year)}
+  \item{AgriConver}{Conversion rate for agricultural conversion (in ha/year)}
+  \item{RuralAbnd}{Conversion rate for rural abandonment (in ha/year)}
 }
 }
 \usage{
 lcc.demand
 }
 \description{
-Binary raster to identify the study area (1 or NA)
+Induced landscape changes: rural abandonment, agricultural conversion and smart plantations
 }
 \keyword{datasets}
