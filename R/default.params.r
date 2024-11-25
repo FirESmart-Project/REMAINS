@@ -33,7 +33,7 @@ default.params = function(){
     ## Land-cover type fire proneness
     lct.fire.prone = data.frame(lct = c("crop", "pine", "oak", "sparseveg", "shrub",
                                         "water", "grass", "urban", "shrub.to.pine", "shrub.to.oak"),
-                                flam = c(0.29, 0.94, 0.94, 0.9, 0.52, 1, 0, 0, 0.94, 0.94)),
+                                flam = c(0.29, 0.90, 0.52, 1, 0.94, 0, 0.29, 0, 0.94, 0.94)),
     
     ## Weights of the spread rate factors
     wslope = 0.575,
