@@ -225,7 +225,8 @@ land.dyn.mdl = function(scenDir, is.land.cover.change = TRUE, is.wildfire = TRUE
                         is.encroachment = TRUE, nrun = 1, params = NULL, lcc.demand = NULL, 
                         save.land = FALSE, out.maps = FALSE, write.outputs = FALSE, verbose = FALSE){
 
-  
+  conflicts_prefer(dplyr::filter)
+  conflicts_prefer(dplyr::select)
   options(dplyr.summarise.inform=F)
   
   cat(paste0("*************** Run scenario: ", scenDir," ************ \n"))
